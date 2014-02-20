@@ -1,4 +1,4 @@
-aplilary
+apilary
 ========
 
 API management tool
