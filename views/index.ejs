@@ -38,7 +38,7 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right visible-xs">
-        <li><a href="#">API Catalog</a></li>
+        <li><a href="#">API Catalogs</a></li>
         <li><a href="#">Documentation</a></li>
         <li><a href="#">Help</a></li>
       </ul>
@@ -53,7 +53,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-list"></span> API Catalog</a></li>
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-list"></span> API Catalogs</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-book"></span> Documentation</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Help</a></li>
       </ul>
@@ -62,40 +62,31 @@
 
       <!-- Main View -->
 
-      <h1 class="page-header">API Catalog</h1>
+      <div ng-controller="CatalogController">
+        <h1 class="page-header">API Catalogs</h1>
 
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Versions</th>
-            <th>Description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span class="label label-primary" style="font-size: 1em">User API</span></td>
-            <td>
-              <span class="label label-danger">V0.8</span>
-              <span class="label label-warning">V0.9</span>
-              <span class="label label-primary">V1</span>
-              <span class="label label-default">V1.1</span>
-            </td>
-            <td>Provides APIs to access user information</td>
-          </tr>
-          <tr>
-            <td><span class="label label-primary" style="font-size: 1em">Catalog API</span></td>
-            <td><span class="label label-primary">V1</span></td>
-            <td>Product catalog management API</td>
-          </tr>
-          <tr>
-            <td><span class="label label-default" style="font-size: 1em">Search API</span></td>
-            <td><span class="label label-default">V1</span></td>
-            <td>Generic search API</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Catalog</th>
+              <th>Versions</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="catalog in catalogs">
+              <td><span class="label label-primary" style="font-size: 1em">{{catalog.name}}</span></td>
+              <td>
+                <span ng-repeat="versionInfo in catalog.versions">
+                  <span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span>
+                </span>
+              </td>
+              <td>{{catalog.description}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- /Main View -->
