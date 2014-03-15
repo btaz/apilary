@@ -51,6 +51,7 @@
 
 <div class="container-fluid">
   <div class="row">
+    <!-- Left Pane -->
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <li class="active"><a href="#"><span class="glyphicon glyphicon-list"></span> API Catalogs</a></li>
@@ -58,10 +59,12 @@
         <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Help</a></li>
       </ul>
     </div>
+    <!-- /Left Pane -->
+
+    <!-- Center Pane -->
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
       <!-- Main View -->
-
       <div ng-controller="CatalogController">
         <h1 class="page-header">API Catalogs</h1>
 
@@ -70,13 +73,17 @@
             <thead>
             <tr>
               <th>Catalog</th>
+              <th>Type</th>
               <th>Versions</th>
               <th>Description</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="catalog in catalogs">
-              <td><span class="label label-primary" style="font-size: 1em">{{catalog.name}}</span></td>
+              <td><span class="label label-primary" style="font-size: 1em"><span class="glyphicon glyphicon-book"></span> {{catalog.name}}</span></td>
+              <td>
+                <span class="label label-default"><span class="glyphicon glyphicon-transfer"></span> REST</span>
+              </td>
               <td>
                 <span ng-repeat="versionInfo in catalog.versions">
                   <span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span>
@@ -87,11 +94,30 @@
             </tbody>
           </table>
         </div>
-      </div>
 
+        <!-- Actions -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-success"><span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
+        </div>
+        <!-- /Actions -->
+
+        <!-- Pagination Controls -->
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-default">&laquo;</button>
+          <button type="button" class="btn btn-default">1</button>
+          <button type="button" class="btn btn-default">2</button>
+          <button type="button" class="btn btn-default">3</button>
+          <button type="button" class="btn btn-default">4</button>
+          <button type="button" class="btn btn-default">&raquo;</button>
+        </div>
+        <!-- /Pagination Controls -->
+
+      </div>
       <!-- /Main View -->
 
     </div>
+    <!-- /Center Pane -->
+
   </div>
 </div>
 
