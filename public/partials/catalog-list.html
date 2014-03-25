@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
   <!-- Main View -->
-  <div>
+  <div class="row">
     <h1 class="page-header">API Catalogs</h1>
 
     <div class="table-responsive">
@@ -47,8 +47,30 @@
       <button type="button" class="btn btn-default">&raquo;</button>
     </div>
     <!-- /Pagination Controls -->
-
   </div>
+
+  <div class="row top10 well well-sm">
+    <form role="form">
+      <div class="form-group">
+        <label for="catalogNameInput">Catalog Name</label>
+        <input type="input" class="form-control" id="catalogNameInput" placeholder="Catalog name">
+      </div>
+      <div style="margin-bottom: 0" class="form-group">
+        <label style="margin-bottom: 0">Service Types</label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" checked="checked" disabled="disabled"> REST
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Version</label>
+        <input type="input" class="form-control" id="exampleInputPassword1" placeholder="V1">
+      </div>
+      <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
+    </form>
+  </div>
+
   <!-- /Main View -->
 
 </div>
