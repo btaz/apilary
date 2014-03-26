@@ -6,6 +6,7 @@ var apilaryControllers = angular.module('apilaryControllers', []);
 
 apilaryControllers.controller('CatalogListController', ['$scope',
   function($scope) {
+    var idSeq = 1003;
     var catalogs = [
       {
         "id":"1000",
@@ -38,10 +39,33 @@ apilaryControllers.controller('CatalogListController', ['$scope',
     $scope.catalogs = catalogs;
     $scope.displayCreateForm = false;
     $scope.displayCreateButton = true;
+    $scope.newCatalog = null;
 
-    $scope.createCatalog = function() {
+    $scope.displayCreateCatalogForm = function() {
       $scope.displayCreateButton = false;
       $scope.displayCreateForm = true;
+    };
+
+    $scope.createCatalog = function() {
+      $scope.displayCreateForm = false;
+      $scope.displayCreateButton = true;
+
+      var catalogId = idSeq++ + "";
+      var catalogName = $scope.newCatalog.name
+      var version = $scope.newCatalog.version;
+      var status = "draft";
+      var description = $scope.newCatalog.description;
+
+      catalogs.push({
+        "id":catalogId,
+        "name":catalogName,
+        "versions":[
+          {"version":version, "status":status}
+        ],
+        "description":description
+      });
+
+      $scope.newCatalog = null;
     };
 
     $scope.listCatalogs = function() {

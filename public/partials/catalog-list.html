@@ -33,7 +33,7 @@
 
     <!-- Actions -->
     <div class="btn-group" ng-show="displayCreateButton">
-      <button type="button" class="btn btn-default btn-success" ng-click="createCatalog()">
+      <button type="button" class="btn btn-default btn-success" ng-click="displayCreateCatalogForm()">
         <span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
     </div>
     <!-- /Actions -->
@@ -54,21 +54,26 @@
     <form role="form">
       <div class="form-group">
         <label for="catalogNameInput">Catalog Name</label>
-        <input type="input" class="form-control" id="catalogNameInput" placeholder="Catalog name">
+        <input type="input" class="form-control" ng-model="newCatalog.name" id="catalogNameInput" placeholder="Catalog name">
       </div>
       <div style="margin-bottom: 0" class="form-group">
         <label style="margin-bottom: 0">Service Types</label>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" checked="checked" disabled="disabled"> REST
+          <input name="apiType" type="checkbox" checked="checked" disabled="disabled"> REST
         </label>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Version</label>
-        <input type="input" class="form-control" id="exampleInputPassword1" placeholder="V1">
+        <label for="versionInput">Version</label>
+        <input type="input" class="form-control" ng-model="newCatalog.version" id="versionInput" placeholder="V1">
       </div>
-      <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
+      <div class="form-group">
+        <label for="descriptionInput">Description</label>
+        <input type="input" class="form-control" ng-model="newCatalog.description" id="descriptionInput" placeholder="">
+      </div>
+      <button type="submit" class="btn btn-success" ng-click="createCatalog()">
+        <span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
     </form>
   </div>
 
