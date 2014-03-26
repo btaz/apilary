@@ -36,6 +36,13 @@ apilaryControllers.controller('CatalogListController', ['$scope',
       }
     ];
     $scope.catalogs = catalogs;
+    $scope.displayCreateForm = false;
+    $scope.displayCreateButton = true;
+
+    $scope.createCatalog = function() {
+      $scope.displayCreateButton = false;
+      $scope.displayCreateForm = true;
+    };
 
     $scope.listCatalogs = function() {
     }

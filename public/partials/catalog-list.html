@@ -32,8 +32,9 @@
     </div>
 
     <!-- Actions -->
-    <div class="btn-group">
-      <button type="button" class="btn btn-default btn-success"><span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
+    <div class="btn-group" ng-show="displayCreateButton">
+      <button type="button" class="btn btn-default btn-success" ng-click="createCatalog()">
+        <span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
     </div>
     <!-- /Actions -->
 
@@ -49,7 +50,7 @@
     <!-- /Pagination Controls -->
   </div>
 
-  <div class="row top10 well well-sm">
+  <div class="row top10 well well-sm" ng-show="displayCreateForm">
     <form role="form">
       <div class="form-group">
         <label for="catalogNameInput">Catalog Name</label>
