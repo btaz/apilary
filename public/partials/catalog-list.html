@@ -11,6 +11,7 @@
           <th>Catalog</th>
           <th>Type</th>
           <th>Versions</th>
+          <th>Action</th>
           <th>Description</th>
         </tr>
         </thead>
@@ -21,10 +22,11 @@
             <span class="label label-default"><span class="glyphicon glyphicon-transfer"></span> REST</span>
           </td>
           <td>
-                <span ng-repeat="versionInfo in catalog.versions">
-                  <span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span>
-                </span>
+            <span ng-repeat="versionInfo in catalog.versions">
+              <span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span>
+            </span>
           </td>
+          <td><button type="button" class="btn btn-default btn-xs" ng-click="editCatalogDialog(catalog._id)">Edit</button></td>
           <td>{{catalog.description}}</td>
         </tr>
         </tbody>
@@ -33,7 +35,7 @@
 
     <!-- Actions -->
     <div class="btn-group" ng-show="displayCreateButton">
-      <button type="button" class="btn btn-default btn-success" ng-click="displayCreateCatalogForm()">
+      <button type="button" class="btn btn-default btn-success" ng-click="createCatalogDialog()">
         <span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
     </div>
     <!-- /Actions -->
@@ -50,11 +52,11 @@
     <!-- /Pagination Controls -->
   </div>
 
-  <div class="row top10 well well-sm" ng-show="displayCreateForm">
+  <div class="row top10 well well-sm" ng-show="displayCatalogForm">
     <form role="form">
       <div class="form-group">
         <label for="catalogNameInput">Catalog Name</label>
-        <input type="input" class="form-control" ng-model="newCatalog.name" id="catalogNameInput" placeholder="Catalog name">
+        <input type="input" class="form-control" ng-model="editCatalog.name" id="catalogNameInput" placeholder="Catalog name">
       </div>
       <div style="margin-bottom: 0" class="form-group">
         <label style="margin-bottom: 0">Service Types</label>
@@ -65,15 +67,13 @@
         </label>
       </div>
       <div class="form-group">
-        <label for="versionInput">Version</label>
-        <input type="input" class="form-control" ng-model="newCatalog.version" id="versionInput" placeholder="V1">
-      </div>
-      <div class="form-group">
         <label for="descriptionInput">Description</label>
-        <input type="input" class="form-control" ng-model="newCatalog.description" id="descriptionInput" placeholder="">
+        <input type="input" class="form-control" ng-model="editCatalog.description" id="descriptionInput" placeholder="">
       </div>
-      <button type="submit" class="btn btn-success" ng-click="createCatalog()">
-        <span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
+      <button type="submit" class="btn btn-success" ng-click="catalogMethod()">
+        <span class="glyphicon glyphicon-ok"></span> Save Catalog</button>
+      <button type="submit" class="btn btn-default" ng-click="cancelCatalogDialog()">
+        <span class="glyphicon glyphicon-remove"></span> Cancel</button>
     </form>
   </div>
 

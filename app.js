@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
+  , api = require('./routes/api')
   , path = require('path');
 
 var app = express();
@@ -28,6 +29,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/api/catalogs', api.getCatalogs);
+app.get('/api/catalogs/:id', api.getCatalog);
+app.post('/api/catalogs', api.createCatalog);
+app.put('/api/catalogs/:id', api.updateCatalog);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
