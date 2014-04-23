@@ -15,7 +15,7 @@ apilaryApp.config(['$routeProvider',
         templateUrl: 'partials/catalog-list.html',
         controller: 'CatalogListController'
       }).
-      when('/catalog/:catalogId', {
+      when('/catalogs/:catalogId', {
         templateUrl: 'partials/catalog-detail.html',
         controller: 'CatalogDetailController'
       }).

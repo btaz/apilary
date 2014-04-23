@@ -17,13 +17,13 @@
         </thead>
         <tbody>
         <tr ng-repeat="catalog in catalogs">
-          <td><a href="#/catalog/{{ catalog.id }}"><span class="label label-primary" style="font-size: 1em"><span class="glyphicon glyphicon-book"></span> {{catalog.name}}</span></a></td>
+          <td><a href="#/catalogs/{{ catalog._id }}"><span class="label label-primary" style="font-size: 1em"><span class="glyphicon glyphicon-book"></span> {{catalog.name}}</span></a></td>
           <td>
             <span class="label label-default"><span class="glyphicon glyphicon-transfer"></span> REST</span>
           </td>
           <td>
             <span ng-repeat="versionInfo in catalog.versions">
-              <span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span>
+              <a href="#"><span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span></a>
             </span>
           </td>
           <td><button type="button" class="btn btn-default btn-xs" ng-click="editCatalogDialog(catalog._id)">Edit</button></td>
@@ -52,6 +52,7 @@
     <!-- /Pagination Controls -->
   </div>
 
+  <!-- Edit Catalog -->
   <div class="row top10 well well-sm" ng-show="displayCatalogForm">
     <form role="form">
       <div class="form-group">
@@ -76,6 +77,7 @@
         <span class="glyphicon glyphicon-remove"></span> Cancel</button>
     </form>
   </div>
+  <!-- /Edit Catalog -->
 
   <!-- /Main View -->
 
