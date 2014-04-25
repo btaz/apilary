@@ -70,51 +70,14 @@ apilaryControllers.controller('CatalogListController', ['$scope', 'Catalogs',
 
   }]);
 
-// =====================================================================================================================
-
-apilaryControllers.controller('CatalogDetailController', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+apilaryControllers.controller('CatalogDetailController', ['$scope', '$routeParams', 'Catalogs',
+  function($scope, $routeParams, catalogs) {
     var catalogId = $routeParams.catalogId;
-
-    var catalogs = [
-      {
-        "id":"1000",
-        "name":"ORG API",
-        "versions":[
-          {"version":"V0.8", "status":"retired"},
-          {"version":"V0.9", "status":"deprecated"},
-          {"version":"V1",   "status":"active"},
-          {"version":"V1.1", "status":"draft"}
-        ],
-        "description":"Provides APIs to organization information"
-      },
-      {
-        "id":"1001",
-        "name":"Catalog API",
-        "versions":[
-          {"version":"V1",   "status":"active"}
-        ],
-        "description":"Product catalog management API"
-      },
-      {
-        "id":"1002",
-        "name":"Search API",
-        "versions":[
-          {"version":"V1 beta",   "status":"draft"}
-        ],
-        "description":"Generic search API"
+    var catalog = catalogs.get({id:catalogId}, function(){
+      if(angular.isUndefined(catalog.versions) || catalog.versions.length == 0) {
+        catalog.versions = [{ "version": "V1", "status": "active" }];
       }
-    ];
-    $scope.catalog = getCatalog(catalogs, catalogId);
-    $scope.catalogs = catalogs;
+    });
 
-    function getCatalog(catalogs, catalogId) {
-      for(var i=0; i<catalogs.length; i++) {
-        if(catalogs[i].id == catalogId) {
-          return catalogs[i];
-        }
-      }
-      return [];
-    }
-
+    $scope.catalog = catalog;
   }]);

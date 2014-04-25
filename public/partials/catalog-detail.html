@@ -6,10 +6,7 @@
 
     <div class="table-responsive">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="">V0.8</a></li>
-        <li><a href="">V0.9</a></li>
-        <li><a href="">V1.0</a></li>
-        <li><a href="">V1.1</a></li>
+        <li ng-class="{active : $first}" ng-repeat="item in catalog.versions"><a href="">{{item.version}}</a></li>
       </ul>
 
       <table class="table table-striped">
@@ -54,6 +51,12 @@
       <button type="button" class="btn btn-default">&raquo;</button>
     </div>
     <!-- /Pagination Controls -->
+
+    <div>
+      <pre>
+{{catalog | json}}
+      </pre>
+    </div>
 
   </div>
   <!-- /Main View -->
