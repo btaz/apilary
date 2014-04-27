@@ -8,17 +8,45 @@
       <ul class="nav nav-tabs">
         <li ng-class="{active : $first}" ng-repeat="item in catalog.versions"><a href="">{{item.version}}</a></li>
       </ul>
+      <h4>API status is: <span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}['active']">Active</span></h4>
+
+      <h2>API List</h2>
+      <p>Aenean non nunc semper, consectetur lectus congue, malesuada felis. Pellentesque pulvinar ante consectetur interdum convallis. Suspendisse scelerisque nunc elit, sit amet porttitor urna mattis quis. Maecenas convallis, tellus in euismod pellentesque, risus mauris dignissim odio, at tristique arcu augue vel augue.</p>
 
       <table class="table table-striped">
         <thead>
         <tr>
-          <th>Catalog</th>
-          <th>Type</th>
-          <th>Versions</th>
+          <th>Method</th>
+          <th>Resource</th>
+          <th>Action</th>
           <th>Description</th>
         </tr>
         </thead>
         <tbody>
+          <tr>
+            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['get']"><span class="uppercase"><strong>get</strong></span></button></td>
+            <td>http://domain/companies/:id</td>
+            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
+            <td>Get company information by ID</td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['put']"><span class="uppercase"><strong>put</strong></span></button></td>
+            <td>http://domain/companies/:id</td>
+            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
+            <td>Update company information by ID</td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['post']"><span class="uppercase"><strong>post</strong></span></button></td>
+            <td>http://domain/companies</td>
+            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
+            <td>Add a new company</td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['delete']"><span class="uppercase"><strong>delete</strong></span></button></td>
+            <td>http://domain/companies/:id</td>
+            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
+            <td>Delete company information by ID</td>
+          </tr>
         <!--<tr ng-repeat="catalog in catalogs">-->
           <!--<td><span class="label label-primary" style="font-size: 1em"><span class="glyphicon glyphicon-book"></span> {{catalog.name}}</span></td>-->
           <!--<td>-->
@@ -36,8 +64,10 @@
     </div>
 
     <!-- Actions -->
+    <!--<div class="btn-group" ng-show="displayCreateButton">-->
     <div class="btn-group">
-      <button type="button" class="btn btn-default btn-success"><span class="glyphicon glyphicon-plus"></span> Create API</button>
+      <button type="button" class="btn btn-success" ng-click="createCatalogDialog()">
+        <span class="glyphicon glyphicon-plus"></span> Create API</button>
     </div>
     <!-- /Actions -->
 
@@ -52,7 +82,14 @@
     </div>
     <!-- /Pagination Controls -->
 
+    <div class="row">
+    </div>
+
     <div>
+      <br>
+      <br>
+      <br>
+      <br>
       <pre>
 {{catalog | json}}
       </pre>
