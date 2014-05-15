@@ -37,7 +37,7 @@
       <div class="spacer10"></div>
       <h2>Resources</h2>
       <ul class="nav nav-tabs">
-        <li ng-class="{active : item.version == page.version}" ng-repeat="item in page.catalog.versions"><a href="">{{item.version}}</a></li>
+        <li ng-class="{active : item.version == page.version}" ng-repeat="item in page.catalog.versions"><a href="#/catalogs/{{page.catalog._id }}?version={{ item.version }}">{{item.version}}</a></li>
       </ul>
 
       <div class="spacer10"></div>
