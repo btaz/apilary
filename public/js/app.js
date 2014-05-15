@@ -8,8 +8,9 @@ var apilaryApp = angular.module('apilaryApp', [
   'apilaryServices'
 ]);
 
-apilaryApp.config(['$routeProvider',
-  function($routeProvider) {
+apilaryApp.config(['$locationProvider', '$routeProvider',
+  function($locationProvider, $routeProvider) {
+    $locationProvider.html5Mode(false);
     $routeProvider.
       when('/catalogs', {
         templateUrl: 'partials/catalog-list.html',

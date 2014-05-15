@@ -5,7 +5,7 @@
     <h1 class="page-header">API Catalogs</h1>
 
     <div class="table-responsive">
-      <table class="table table-striped">
+      <table class="table table-hover">
         <thead>
         <tr>
           <th>Catalog</th>
@@ -16,17 +16,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="catalog in catalogs">
+        <tr ng-repeat="catalog in catalogs.list">
           <td><a href="#/catalogs/{{ catalog._id }}"><span class="label label-primary" style="font-size: 1em"><span class="glyphicon glyphicon-book"></span> {{catalog.name}}</span></a></td>
           <td>
             <span class="label label-default"><span class="glyphicon glyphicon-transfer"></span> REST</span>
           </td>
           <td>
             <span ng-repeat="versionInfo in catalog.versions">
-              <a href="#"><span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span></a>
+              <a href="#/catalogs/{{ catalog._id }}?version={{ versionInfo.version }}"><span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span></a>
             </span>
           </td>
-          <td><button type="button" class="btn btn-default btn-xs" ng-click="editCatalogDialog(catalog._id)">Edit</button></td>
+          <td><button type="button" class="btn btn-default btn-xs" ng-click="editCatalogModal(catalog._id)">Edit</button></td>
           <td>{{catalog.description}}</td>
         </tr>
         </tbody>
@@ -34,8 +34,8 @@
     </div>
 
     <!-- Actions -->
-    <div class="btn-group" ng-show="displayCreateButton">
-      <button type="button" class="btn btn-default btn-success" ng-click="createCatalogDialog()">
+    <div class="btn-group" ng-show="page.displayCreateButton">
+      <button type="button" class="btn btn-success btn-sm" ng-click="createCatalogModal()">
         <span class="glyphicon glyphicon-plus"></span> Create Catalog</button>
     </div>
     <!-- /Actions -->
@@ -50,35 +50,12 @@
       <button type="button" class="btn btn-default">&raquo;</button>
     </div>
     <!-- /Pagination Controls -->
-  </div>
+  </div> <!-- /row -->
 
-  <!-- Edit Catalog -->
-  <div class="row top10 well well-sm" ng-show="displayCatalogForm">
-    <form role="form">
-      <div class="form-group">
-        <label for="catalogNameInput">Catalog Name</label>
-        <input type="input" class="form-control" ng-model="editCatalog.name" id="catalogNameInput" placeholder="Catalog name">
-      </div>
-      <div style="margin-bottom: 0" class="form-group">
-        <label style="margin-bottom: 0">Service Types</label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input name="apiType" type="checkbox" checked="checked" disabled="disabled"> REST
-        </label>
-      </div>
-      <div class="form-group">
-        <label for="descriptionInput">Description</label>
-        <input type="input" class="form-control" ng-model="editCatalog.description" id="descriptionInput" placeholder="">
-      </div>
-      <button type="submit" class="btn btn-success" ng-click="catalogMethod()">
-        <span class="glyphicon glyphicon-ok"></span> Save Catalog</button>
-      <button type="submit" class="btn btn-default" ng-click="cancelCatalogDialog()">
-        <span class="glyphicon glyphicon-remove"></span> Cancel</button>
-    </form>
+  <!-- Modals -->
+  <div class="modal fade" id="catalogModal" tabindex="-1" role="dialog" aria-labelledby="catalogModalLabel" aria-hidden="true" ng-include="'/modal/catalog.html'">
   </div>
-  <!-- /Edit Catalog -->
+  <!-- /Modals -->
 
   <!-- /Main View -->
-
 </div>

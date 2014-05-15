@@ -1,0 +1,24 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">{{modal.modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+      <form role="form">
+        <div class="form-group">
+          <label for="versionNameInput">Version Name</label>
+          <input type="input" class="form-control" ng-model="modal.catalog.version" id="versionNameInput" placeholder="v1">
+        </div>
+        <div class="form-group">
+          <label for="versionInformationInput">Version Information</label>
+          <input type="input" class="form-control" ng-model="modal.catalog.information" id="versionInformationInput">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modal.saveChangesMethod()">Save changes</button>
+    </div>
+  </div>
+</div>
