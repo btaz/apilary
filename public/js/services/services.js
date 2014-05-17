@@ -13,3 +13,13 @@ apilaryServices.factory('Catalogs', ['$resource',
       update: {method:'PUT', params: {id: '@_id'}}
     });
   }]);
+
+apilaryServices.factory('Apis', ['$resource',
+  function($resource) {
+    return $resource('api/catalogs/:catalog_id/apis/:id', {}, {
+      list: {method:'GET', isArray: true},
+      get: {method:'GET', isArray: false},
+      create: {method:'POST', params: {catalog_id: '@catalog_id'}},
+      update: {method:'PUT', params: {id: '@_id'}}
+    });
+  }]);

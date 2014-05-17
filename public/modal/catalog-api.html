@@ -1,0 +1,37 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">{{modal.modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+      <form role="form">
+        <div style="margin-bottom: 0" class="form-group">
+          <label style="margin-bottom: 0">Method</label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="radio" ng-model="modal.api.method" value="GET" checked="checked"> GET
+            <input type="radio" ng-model="modal.api.method" value="PUT"> PUT&nbsp;
+            <input type="radio" ng-model="modal.api.method" value="POST"> POST&nbsp;
+            <input type="radio" ng-model="modal.api.method" value="DELETE"> DELETE&nbsp;
+            <input type="radio" ng-model="modal.api.method" value="HEAD"> HEAD&nbsp;
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="resourceInput">Resource</label>
+          <input type="input" class="form-control" ng-model="modal.api.resource" id="resourceInput" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="descriptionInput">Description</label>
+          <input type="input" class="form-control" ng-model="modal.api.description" id="descriptionInput">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modal.saveChangesMethod()">Save changes</button>
+    </div>
+    <pre>{{modal.api|json}}</pre>
+  </div>
+</div>

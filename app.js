@@ -29,10 +29,18 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+
 app.get('/api/catalogs', api.getCatalogs);
 app.get('/api/catalogs/:id', api.getCatalog);
 app.post('/api/catalogs', api.createCatalog);
 app.put('/api/catalogs/:id', api.updateCatalog);
+
+app.post('/api/catalogs/:catalog_id/apis', api.createApi);
+app.get('/api/catalogs/:catalog_id/apis', api.getApis);
+app.get('/api/catalogs/:catalog_id/apis/:id', api.getApi);
+
+
+// todo: remove
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

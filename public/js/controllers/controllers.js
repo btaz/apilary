@@ -85,10 +85,13 @@ apilaryControllers.controller('CatalogListController', ['$scope', 'Catalogs',
  * Catalog Detail Controller
  * Catalog Detail Controller
  */
-apilaryControllers.controller('CatalogDetailController', ['$scope', '$location', '$routeParams', 'Catalogs',
-  function($scope, $location, $routeParams, catalogs) {
+apilaryControllers.controller('CatalogDetailController', ['$scope', '$location', '$routeParams', 'Catalogs', 'Apis',
+  function($scope, $location, $routeParams, catalogs, apis) {
     $scope.modal = {};
-    $scope.page = {};
+    $scope.page = {
+      catalog:{},
+      apis:[]
+    };
 
     var getCatalogById = function(catalogId) {
       $scope.page.catalog = catalogs.get({id:catalogId}, function(catalog) {
@@ -101,7 +104,11 @@ apilaryControllers.controller('CatalogDetailController', ['$scope', '$location',
       });
     };
 
-    $scope.page.catalog = getCatalogById($routeParams.catalogId);
+    var getApis = function(catalogId) {
+      $scope.page.apis = apis.list({catalog_id:catalogId}, function(apis) {
+        $scope.page.apis = apis;
+      });
+    };
 
     var updateCatalog = function(id) {
       catalogs.update($scope.modal.catalog,
@@ -130,38 +137,30 @@ apilaryControllers.controller('CatalogDetailController', ['$scope', '$location',
       $('#catalogVersionModal').modal('show');
     };
 
-    // ---------------------------------------
+    $scope.createCatalogApiModal = function(catalogId) {
+      $scope.modal.modalTitle = "Create API";
+      $scope.modal.saveChangesMethod = createApi;
+      $('#catalogApiModal').modal('show');
+    };
 
-//    $scope.displayCatalogForm = false;
-//    $scope.displayEditButton = true;
-//    $scope.editCatalog = {};
-//    $scope.catalogMethod = null;
-//    var catalogId = $routeParams.catalogId;
+    var createApi = function() {
+      $scope.modal.api.version = $scope.page.version;
+      apis.create({catalog_id:$scope.page.catalog._id}, $scope.modal.api,
+        function (data, respHeader) {
+          // success
+          $scope.apis.list = apis.list();
+        }, function (err, respHeader) {
+          // error - todo: need error handler
+          console.log(err);
+        });
+// todo: we have two resets, needs to be name specific
+//      resetModalForm();
+      getApis($routeParams.catalogId);
+      $scope.page.displayApiForm = false;
+      $scope.page.displayApiCreateButton = true;
+    };
 
-//    var updateCatalog = function(id) {
-//      catalogs.update($scope.editCatalog,
-//        function (data, respHeader) {
-//          // success
-//          $scope.catalogs = catalogs.list();
-//        }, function (err, respHeader) {
-//          // error - todo: need error handler
-//          console.log(err);
-//        });
-//      resetForm();
-//      $scope.displayCatalogForm = false;
-//      $scope.displayEditButton = true;
-//    };
+    getCatalogById($routeParams.catalogId);
+    getApis($routeParams.catalogId);
 
-//    $scope.editCatalogDialog = function(id) {
-//      $scope.catalogMethod = updateCatalog;
-//      $scope.displayCatalogForm = true;
-//      $scope.displayEditButton = false;
-//      $scope.editCatalog = catalogs.get({id:id});
-//    };
-
-//    $scope.cancelCatalogDialog = function() {
-//      $scope.displayCatalogForm = false;
-//      $scope.displayCreateButton = true;
-//      resetForm();
-//    };
   }]);

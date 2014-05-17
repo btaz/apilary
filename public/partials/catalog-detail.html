@@ -2,7 +2,7 @@
 
   <!-- Main View -->
   <div>
-    <h1 class="page-header">Catalog: {{page.catalog.name}}</h1>
+    <h1 class="page-header"><span class="title-fade">Catalog: </span>{{page.catalog.name}}</h1>
 
     <h2>Information</h2>
 
@@ -54,47 +54,19 @@
         <tr>
           <th>Method</th>
           <th>Resource</th>
+          <th>Data</th>
           <th>Action</th>
           <th>Description</th>
         </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['get']"><span class="uppercase"><strong>get</strong></span></button></td>
-            <td>companies/:id</td>
+          <tr ng-repeat="api in page.apis">
+            <td><button type="button" class="btn btn-xs" ng-class="{'GET':'btn-success','POST':'btn-primary','PUT':'btn-primary', 'DELETE':'btn-danger','HEAD':'btn-warning'}[api.method]"><span class="uppercase"><strong>{{api.method}}</strong></span></button></td>
+            <td>{{api.resource}}</td>
+            <td><button type="button" class="btn btn-default btn-xs">Data</button></td>
             <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
-            <td>Get company information by ID</td>
+            <td>{{api.description}}</td>
           </tr>
-          <tr>
-            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['put']"><span class="uppercase"><strong>put</strong></span></button></td>
-            <td>companies/:id</td>
-            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
-            <td>Update company information by ID</td>
-          </tr>
-          <tr>
-            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['post']"><span class="uppercase"><strong>post</strong></span></button></td>
-            <td>companies</td>
-            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
-            <td>Add a new company</td>
-          </tr>
-          <tr>
-            <td><button type="button" class="btn btn-xs" ng-class="{'get':'btn-success','post':'btn-primary','put':'btn-primary', 'delete':'btn-danger','head':'btn-warning'}['delete']"><span class="uppercase"><strong>delete</strong></span></button></td>
-            <td>companies/:id</td>
-            <td><button type="button" class="btn btn-default btn-xs">Edit</button></td>
-            <td>Delete company information by ID</td>
-          </tr>
-        <!--<tr ng-repeat="catalog in catalogs">-->
-          <!--<td><span class="label label-primary" style="font-size: 1em"><span class="glyphicon glyphicon-book"></span> {{catalog.name}}</span></td>-->
-          <!--<td>-->
-            <!--<span class="label label-default"><span class="glyphicon glyphicon-transfer"></span> REST</span>-->
-          <!--</td>-->
-          <!--<td>-->
-                <!--<span ng-repeat="versionInfo in catalog.versions">-->
-                  <!--<span class="label" ng-class="{'retired':'label-danger','deprecated':'label-warning','active':'label-primary','draft':'label-default'}[versionInfo.status]">{{versionInfo.version}}</span>-->
-                <!--</span>-->
-          <!--</td>-->
-          <!--<td>{{catalog.description}}</td>-->
-        <!--</tr>-->
         </tbody>
       </table>
     </div>
@@ -102,13 +74,13 @@
     <!-- Actions -->
     <!--<div class="btn-group" ng-show="displayCreateButton">-->
     <div class="btn-group">
-      <button type="button" class="btn btn-success btn-sm" ng-click="createCatalogDialog()">
+      <button type="button" class="btn btn-success btn-sm" ng-click="createCatalogApiModal()">
         <span class="glyphicon glyphicon-plus"></span> Create API</button>
     </div>
     <!-- /Actions -->
 
     <!-- Pagination Controls -->
-    <div class="btn-group pull-right">
+    <div class="btn-group pull-right" ng-show="false">
       <button type="button" class="btn btn-default">&laquo;</button>
       <button type="button" class="btn btn-default">1</button>
       <button type="button" class="btn btn-default">2</button>
@@ -121,15 +93,13 @@
     <div class="row">
     </div>
 
-    <div>
-      <br>
-      <br>
-      <br>
-      <br>
+    <!-- Debug -->
+    <div ng-show="false">
       <pre>
-{{page | json}}
+        {{page | json}}
       </pre>
     </div>
+    <!-- /Debug -->
 
   </div>
   <!-- /Main View -->
@@ -138,6 +108,8 @@
   <div class="modal fade" id="catalogModal" tabindex="-1" role="dialog" aria-labelledby="catalogModalLabel" aria-hidden="true" ng-include="'/modal/catalog.html'">
   </div>
   <div class="modal fade" id="catalogVersionModal" tabindex="-1" role="dialog" aria-labelledby="catalogVersionModalLabel" aria-hidden="true" ng-include="'/modal/catalog-version.html'">
+  </div>
+  <div class="modal fade" id="catalogApiModal" tabindex="-1" role="dialog" aria-labelledby="catalogApiModalLabel" aria-hidden="true" ng-include="'/modal/catalog-api.html'">
   </div>
   <!-- /Modals -->
 

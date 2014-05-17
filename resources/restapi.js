@@ -3,7 +3,7 @@
 var http = require('http');
 
 /**
- * REST API Client
+ * REST API Client. This provides client access to other REST APIs
  */
 exports.resource = function (host, port, url, paramDefaults, actions) {
   var api = {};
